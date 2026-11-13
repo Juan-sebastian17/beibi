@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f2">
+  <title>Para Valery, mi Beibi</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #452c35;
+      --muted: #876e77;
+      --rose: #d86f83;
+      --rose-dark: #b94f68;
+      --paper: #fffaf7;
+      --blush: #f9e6e5;
+      --peach: #fbe9d8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 12%, #f9e5e9 0, transparent 34rem),
+        radial-gradient(ellipse at 92% 38%, #f8eadc 0, transparent 30rem),
+        var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    button { font: inherit; }
+
+    .wrap {
+      width: min(1050px, calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
+      padding: 72px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: "♡";
+      position: absolute;
+      color: #d86f8330;
+      font-family: sans-serif;
+      pointer-events: none;
+    }
+
+    .hero::before { font-size: 180px; top: 8%; left: 5%; transform: rotate(-17deg); }
+    .hero::after { font-size: 250px; right: 3%; bottom: 1%; transform: rotate(14deg); }
+
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+    .eyebrow {
+      color: var(--rose-dark);
+      font: 700 12px/1.4 Arial, sans-serif;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0;
+      font-size: clamp(48px, 9vw, 88px);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .98;
+    }
+
+    h1 span { color: var(--rose-dark); font-style: italic; }
+
+    .intro {
+      max-width: 540px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: clamp(17px, 2.5vw, 20px);
+      line-height: 1.7;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      padding: 13px 22px;
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      background: var(--rose-dark);
+      box-shadow: 0 9px 22px #b94f6830;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .button:hover { background: #a9435b; transform: translateY(-2px); }
+    .button:focus-visible { outline: 3px solid #452c35; outline-offset: 4px; }
+
+    .section-dock {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+      margin-top: -14px;
+      padding: 9px 12px 10px;
+      border: 1px solid #efd6d5;
+      border-radius: 16px;
+      background: #fffaf7ed;
+      box-shadow: 0 10px 28px #6b384214;
+      backdrop-filter: blur(12px);
+    }
+
+    .section-tabs {
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+      overflow-x: auto;
+      padding: 0 0 9px;
+      scrollbar-width: thin;
+      scrollbar-color: #e5bfc2 transparent;
+    }
+
+    .section-tab {
+      flex: 0 0 auto;
+      padding: 10px 13px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font: 14px/1.2 Arial, sans-serif;
+      white-space: nowrap;
+      transition: color .2s, background .2s, border-color .2s;
+    }
+
+    .section-tab[aria-selected="true"] {
+      border-color: #efd6d5;
+      color: var(--rose-dark);
+      background: #f9e6e5;
+      font-weight: 700;
+    }
+
+    .section-tab:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+    .section-dock-bottom { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; }
+    .section-progress { min-width: 0; }
+    .section-progress-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .section-progress-step { color: var(--rose-dark); font: 700 11px Arial, sans-serif; white-space: nowrap; }
+    .section-progress-name { overflow: hidden; color: var(--ink); font-size: 15px; text-overflow: ellipsis; white-space: nowrap; }
+    .section-progress-track { height: 3px; margin-top: 7px; overflow: hidden; border-radius: 3px; background: #f2e4e0; }
+    .section-progress-fill { display: block; width: 16.666%; height: 100%; border-radius: inherit; background: var(--rose-dark); transition: width .3s ease; }
+    .section { padding: 75px 0; }
+    .section-heading { margin: 0 0 12px; text-align: center; font-size: clamp(32px, 5vw, 48px); font-weight: 400; }
+    .section-subtitle { margin: 0 auto 34px; max-width: 580px; color: var(--muted); text-align: center; line-height: 1.7; }
+
+    .section-panel { min-height: 0; padding: clamp(42px, 6vw, 70px) 0 58px; animation: panel-arrive .32s ease both; }
+    .section-panel > .eyebrow { margin-bottom: 10px; }
+    .section-panel > .section-heading { max-width: 760px; margin-inline: auto; }
+
+    .panel-navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 760px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #efdeda;
+    }
+
+    .panel-navigation--start { justify-content: flex-end; }
+    .panel-navigation--end { justify-content: flex-start; }
+
+    .panel-navigation .button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .counter-card {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid #efd6d5;
+      border-radius: 16px;
+      background: #fffdfbdc;
+      text-align: center;
+      box-shadow: 0 18px 45px #6b38420c;
+    }
+
+    .counter-label { color: var(--muted); font: 13px Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 22px 0 18px;
+    }
+
+    .counter-unit {
+      padding: 14px 8px;
+      border-radius: 14px;
+      background: #fdf2f0;
+    }
+
+    .counter-value { display: block; color: var(--rose-dark); font-size: clamp(26px, 5vw, 44px); line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .counter-unit-label { display: block; margin-top: 6px; color: var(--muted); font: 12px Arial, sans-serif; }
+    .counter-note { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .timeline {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .memory {
+      display: grid;
+      grid-template-columns: minmax(150px, 220px) 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      border: 1px solid #f0dfda;
+      border-radius: 14px;
+      background: #fffdfbdc;
+    }
+
+    .memory-photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 13px;
+      object-fit: cover;
+    }
+
+    .memory h3 { margin: 2px 0 7px; font-size: 21px; font-weight: 400; }
+    .memory p { margin: 0; color: var(--muted); line-height: 1.65; }
+
+    .playlist {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid #f0d9d4;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--blush), var(--peach));
+      text-align: center;
+    }
+
+    .playlist-icon { font-size: 35px; }
+    .playlist h3 { margin: 10px 0; font-size: 25px; font-weight: 400; }
+    .playlist p { margin: 0 auto 20px; max-width: 480px; color: var(--muted); line-height: 1.6; }
+    .playlist .button { color: var(--rose-dark); background: white; box-shadow: none; text-decoration: none; }
+    .spotify-player { display: block; width: min(100%, 560px); height: 152px; margin: 22px auto 16px; border: 0; border-radius: 12px; }
+
+    .scratch-card {
+      position: relative;
+      width: min(100%, 560px);
+      aspect-ratio: 16 / 8;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid #efd6d5;
+      border-radius: 16px;
+      background: #fffdfb;
+      box-shadow: 0 18px 45px #6b38420c;
+    }
+
+    .scratch-reveal {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      gap: 8px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .scratch-reveal strong { color: var(--rose-dark); font-size: clamp(20px, 4vw, 28px); font-weight: 400; }
+    .scratch-reveal span { color: var(--muted); line-height: 1.5; }
+
+    .wallet-balance { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font: 13px Arial, sans-serif; white-space: nowrap; }
+    .wallet-balance strong { color: #75531e; font-size: 17px; }
+    .wallet-feedback { grid-column: 1 / -1; color: var(--rose-dark); font: 12px Arial, sans-serif; text-align: right; }
+    .wallet-feedback:empty { display: none; }
+
+    .sebacoin-coin {
+      display: grid;
+      width: 34px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 2px solid #a87a27;
+      border-radius: 50%;
+      color: #75531e;
+      background: radial-gradient(circle at 35% 30%, #fff2a8, #eac354 62%, #bd8a2e);
+      box-shadow: inset 0 0 0 2px #f8e6a3, 0 2px 4px #6b38421c;
+      font: 700 14px/1 Georgia, serif;
+    }
+
+    .wallet .sebacoin-coin { width: 28px; }
+
+    .scratch-store { display: grid; justify-items: center; gap: 14px; }
+    .scratch-price { margin: 0; color: var(--muted); text-align: center; }
+    .scratch-price strong { color: #805f24; }
+    .button:disabled { opacity: .48; cursor: not-allowed; transform: none; }
+
+    .scratch-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .scratch-canvas:active { cursor: grabbing; }
+
+    .scratch-actions { display: flex; justify-content: center; margin-top: 18px; }
+
+    .certificate {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 38px;
+      border: 4px double var(--rose-dark);
+      background: #fffdfb;
+      text-align: center;
+      box-shadow: 0 18px 45px #6b38420c;
+    }
+
+    .certificate-mark { color: var(--rose-dark); font-size: 34px; }
+    .certificate h3 { margin: 14px 0; color: var(--rose-dark); font-size: clamp(28px, 5vw, 42px); font-weight: 400; }
+    .certificate p { margin: 10px auto; max-width: 500px; color: var(--muted); line-height: 1.7; }
+    .certificate-recipient { color: var(--ink) !important; font-size: 25px; font-style: italic; }
+    .certificate-signature { margin-top: 28px !important; color: var(--ink) !important; }
+
+    .letter-wrap { max-width: 700px; margin: 0 auto; text-align: center; }
+    .letter-scene {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 18px;
+    }
+
+    .letter {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 560px);
+      margin: 0 0 -12px;
+      padding: 30px;
+      border: 1px solid #efd6d5;
+      border-radius: 8px 8px 2px 2px;
+      background:
+        repeating-linear-gradient(#fffdfb 0, #fffdfb 31px, #f3e5e2 32px);
+      box-shadow: 0 12px 30px #6b38421c;
+      text-align: left;
+      line-height: 1.85;
+      white-space: pre-line;
+      animation: letter-rise .7s cubic-bezier(.2, .75, .3, 1) both;
+    }
+
+    .letter-envelope {
+      position: relative;
+      z-index: 2;
+      isolation: isolate;
+      width: min(100%, 360px);
+      height: 220px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #dba3a5;
+      border-radius: 12px;
+      color: var(--ink);
+      background: linear-gradient(145deg, #f9dedc, #f1c4c4);
+      box-shadow: 0 16px 32px #6b384224;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .letter-envelope:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 36px #6b38422e;
+    }
+
+    .letter-envelope:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+    .envelope-flap {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 2;
+      height: 62%;
+      background: #eab9bb;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform .65s ease;
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(145deg, #f7d5d3, #f2c9c8);
+      clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .envelope-seal {
+      position: absolute;
+      top: 53%;
+      left: 50%;
+      z-index: 4;
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid #a8425a;
+      border-radius: 50%;
+      color: white;
+      background: var(--rose-dark);
+      box-shadow: 0 3px 8px #6b384226;
+      font: 28px/1 Arial, sans-serif;
+      transform: translate(-50%, -50%);
+      transition: opacity .25s ease;
+    }
+
+    .envelope-label {
+      position: absolute;
+      right: 12px;
+      bottom: 12%;
+      left: 12px;
+      z-index: 4;
+      color: var(--rose-dark);
+      font: 700 14px/1.3 Arial, sans-serif;
+      letter-spacing: .04em;
+    }
+
+    .letter-envelope.is-open .envelope-flap { transform: rotateX(180deg); }
+    .letter-envelope.is-open .envelope-seal { opacity: 0; }
+
+    [hidden] { display: none !important; }
+
+    footer { padding: 25px 18px 40px; color: var(--muted); text-align: center; font-size: 14px; }
+    footer span { color: var(--rose-dark); }
+
+    @keyframes letter-rise {
+      from { opacity: 0; transform: translateY(24px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes panel-arrive {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 540px) {
+      .hero { min-height: 85vh; }
+      .hero::before { font-size: 115px; left: -10px; }
+      .hero::after { font-size: 155px; right: -15px; }
+      .section { padding: 56px 0; }
+      .section-dock { top: 4px; padding: 7px 8px 8px; border-radius: 12px; }
+      .section-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; overflow: visible; padding-bottom: 7px; }
+      .section-tab { min-width: 0; min-height: 38px; padding: 7px 4px; font-size: 12px; line-height: 1.15; text-align: center; white-space: normal; }
+      .section-dock-bottom { gap: 4px 8px; }
+      .section-progress-name { font-size: 14px; }
+      .wallet-balance { gap: 5px; font-size: 12px; }
+      .wallet-label { display: none; }
+      .section-panel { padding: 40px 0 44px; }
+      .section-panel .section-subtitle { margin-bottom: 26px; }
+      .panel-navigation { gap: 8px; margin-top: 30px; padding-top: 16px; }
+      .panel-navigation .button { min-height: 44px; padding: 10px 13px; font-size: 14px; }
+      .memory { grid-template-columns: 1fr; gap: 14px; padding: 17px; }
+      .memory-photo { aspect-ratio: 16 / 10; }
+      .letter { padding: 22px; }
+      .letter-envelope { height: 190px; }
+      .counter { gap: 5px; }
+      .counter-unit { padding: 12px 3px; }
+      .counter-unit-label { font-size: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #panel-certificado, #panel-certificado * { visibility: visible; }
+      #panel-certificado { position: absolute; inset: 0; width: 100%; min-height: 0; padding: 0; }
+      #panel-certificado .panel-navigation, #panel-certificado .certificate-actions { display: none !important; }
+      .certificate { max-width: none; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content wrap">
+      <p class="eyebrow">Para Valery, mi Beibi</p>
+      <h1>Cada día, una razón:<br><span>qué bonito coincidir</span></h1>
+      <p class="intro">Hice este rinconcito para guardar algunas de las razones por las que me haces tan feliz.</p>
+      <a class="button" href="#panel-historia">Descubre nuestro regalo <span aria-hidden="true">↓</span></a>
+    </div>
+  </header>
+
+  <div class="section-dock wrap">
+    <nav class="section-tabs" role="tablist" aria-label="Apartados de nuestro regalo">
+    <button class="section-tab" id="tab-historia" type="button" role="tab" aria-selected="true" aria-controls="panel-historia" tabindex="0">Nuestra historia</button>
+    <button class="section-tab" id="tab-recuerdos" type="button" role="tab" aria-selected="false" aria-controls="panel-recuerdos" tabindex="-1">Recuerdos</button>
+    <button class="section-tab" id="tab-cancion" type="button" role="tab" aria-selected="false" aria-controls="panel-cancion" tabindex="-1">Nuestra canción</button>
+    <button class="section-tab" id="tab-carta" type="button" role="tab" aria-selected="false" aria-controls="panel-carta" tabindex="-1">Una carta</button>
+    <button class="section-tab" id="tab-sorpresa" type="button" role="tab" aria-selected="false" aria-controls="panel-sorpresa" tabindex="-1">Rasca y descubre</button>
+    <button class="section-tab" id="tab-certificado" type="button" role="tab" aria-selected="false" aria-controls="panel-certificado" tabindex="-1">Certificado</button>
+    </nav>
+    <div class="section-dock-bottom">
+      <div class="section-progress" id="section-progress" role="progressbar" aria-label="Progreso de secciones" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+        <div class="section-progress-meta">
+          <span class="section-progress-step"><span id="section-progress-current">01</span> / 06</span>
+          <strong class="section-progress-name" id="section-progress-name">Nuestra historia</strong>
+        </div>
+        <div class="section-progress-track" aria-hidden="true"><span class="section-progress-fill" id="section-progress-fill"></span></div>
+      </div>
+      <div class="wallet-balance" aria-label="Saldo Sebacoin">
+        <span class="sebacoin-coin" aria-hidden="true">S</span>
+        <span class="wallet-label">Saldo Sebacoin</span>
+        <strong id="sebacoin-balance">0</strong>
+      </div>
+      <span class="wallet-feedback" id="sebacoin-feedback" role="status" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="section section-panel" id="panel-historia" role="tabpanel" aria-labelledby="tab-historia" tabindex="0">
+      <p class="eyebrow" style="text-align:center">Cada día, una razón</p>
+      <h2 class="section-heading">Qué bonito coincidir</h2>
+      <p class="section-subtitle">Desde que llegaste, hasta los días normales tienen algo especial. Y esto es solo el comienzo de todo lo que nos queda por vivir.</p>
+      <div class="counter-card">
+        <div class="counter-label">Valery y yo llevamos compartiendo esta historia</div>
+        <div class="counter" id="counter" aria-label="Tiempo juntos">
+          <div class="counter-unit"><span class="counter-value" id="counter-months">0</span><span class="counter-unit-label">meses</span></div>
+          <div class="counter-unit"><span class="counter-value" id="counter-days">0</span><span class="counter-unit-label">días</span></div>
+          <div class="counter-unit"><span class="counter-value" id="counter-hours">00</span><span class="counter-unit-label">horas</span></div>
+          <div class="counter-unit"><span class="counter-value" id="counter-minutes">00</span><span class="counter-unit-label">minutos</span></div>
+          <div class="counter-unit"><span class="counter-value" id="counter-seconds">00</span><span class="counter-unit-label">segundos</span></div>
+        </div>
+        <p class="counter-note" id="counter-note">Un día a la vez, y siempre contigo.</p>
+      </div>
+      <div class="panel-navigation panel-navigation--start">
+        <button class="button" type="button" data-panel-step="1">Siguiente: recuerdos <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="section section-panel" id="panel-recuerdos" role="tabpanel" aria-labelledby="tab-recuerdos" tabindex="0" hidden>
+      <h2 class="section-heading">Pequeños grandes momentos</h2>
+      <p class="section-subtitle">Hay recuerdos que se quedan viviendo en el corazón. Estos son algunos de mis favoritos.</p>
+      <div class="timeline">
+        <article class="memory">
+        <img class="memory-photo" src="imagenes/lo-que-mas-me-gusta.jpeg" alt="Valery en un recuerdo de cuando todo empezó" loading="lazy">
+          <div>
+            <h3>Cuando todo empezó</h3>
+            <p>Ese día en que nuestras miradas, nuestras risas o nuestras palabras empezaron a convertirse en algo nuestro.</p>
+          </div>
+        </article>
+        <article class="memory">
+        <img class="memory-photo" src="imagenes/un-dia-que-no-olvido.jpeg" alt="Valery y yo compartiendo un día que no olvido" loading="lazy">
+          <div>
+            <h3>Un día que no olvido</h3>
+            <p>Pienso en ese momento juntos y todavía me sale una sonrisa. Gracias por hacerlo tan especial.</p>
+          </div>
+        </article>
+        <article class="memory">
+        <img class="memory-photo" src="imagenes/cuando-todo-empezo.jpeg" alt="Un recuerdo juntos con Valery" loading="lazy">
+          <div>
+            <h3>Lo que más me gusta de ti</h3>
+            <p>Tu forma de ser, la paz que me das y lo fácil que haces que cualquier momento se sienta como hogar.</p>
+          </div>
+        </article>
+      </div>
+      <div class="panel-navigation">
+        <button class="button" type="button" data-panel-step="-1"><span aria-hidden="true">←</span> Anterior</button>
+        <button class="button" type="button" data-panel-step="1">Siguiente: canción <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="section section-panel" id="panel-cancion" role="tabpanel" aria-labelledby="tab-cancion" tabindex="0" hidden>
+      <div class="playlist">
+        <div class="playlist-icon" aria-hidden="true">♫</div>
+        <h3>La banda sonora de nosotros</h3>
+        <p>Beibi, esta canción siempre me va a recordar a ti. Espero que te guste este pequeño detalle.</p>
+        <iframe
+          class="spotify-player"
+          src="https://open.spotify.com/embed/track/724Txk8NEBXqNK7nIvY6MK?utm_source=generator&theme=0"
+          title="Reproductor de Spotify: nuestra canción"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        <a class="button" id="song-link" href="#panel-carta">Añade nuestra canción</a>
+      </div>
+      <div class="panel-navigation">
+        <button class="button" type="button" data-panel-step="-1"><span aria-hidden="true">←</span> Anterior</button>
+        <button class="button" type="button" data-panel-step="1">Siguiente: carta <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="section section-panel" id="panel-carta" role="tabpanel" aria-labelledby="tab-carta" tabindex="0" hidden>
+      <div class="letter-wrap">
+        <p class="eyebrow">Para Valery, mi Beibi, con todo mi cariño</p>
+        <h2 class="section-heading">Una carta para ti</h2>
+        <p class="section-subtitle">Porque algunas cosas bonitas merecen decirse en voz alta.</p>
+        <div class="letter-scene">
+          <div class="letter" id="love-letter" hidden>
+          Valery, mi Beibi:
+
+          Gracias por este tiempo juntos y por cada sonrisa que me regalas. Me encanta compartir mis días contigo, conocerte un poquito más y crear recuerdos que son solo nuestros.
+
+          Feliz mes, mi amor. Ojalá esta sea una de muchas celebraciones a tu lado. Te quiero muchísimo. ♡
+          </div>
+          <button class="letter-envelope" id="letter-button" type="button" aria-expanded="false" aria-controls="love-letter">
+            <span class="envelope-flap" aria-hidden="true"></span>
+            <span class="envelope-pocket" aria-hidden="true"></span>
+            <span class="envelope-seal" aria-hidden="true">♡</span>
+            <span class="envelope-label" id="envelope-label">Abrir mi carta</span>
+          </button>
+        </div>
+      </div>
+      <div class="panel-navigation">
+        <button class="button" type="button" data-panel-step="-1"><span aria-hidden="true">←</span> Anterior</button>
+        <button class="button" type="button" data-panel-step="1">Siguiente: sorpresa <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="section section-panel" id="panel-sorpresa" role="tabpanel" aria-labelledby="tab-sorpresa" tabindex="0" hidden>
+      <p class="eyebrow" style="text-align:center">Un pequeño premio</p>
+      <h2 class="section-heading">Rasca para descubrir</h2>
+      <p class="section-subtitle">Canjea tus Sebacoins por una oportunidad.</p>
+      <div class="scratch-store" id="scratch-store">
+        <p class="scratch-price">Cada rasca cuesta <strong>1 Sebacoin</strong>.</p>
+        <button class="button" id="buy-scratch" type="button">Comprar rasca</button>
+      </div>
+      <div id="scratch-game" hidden>
+        <div class="scratch-card">
+          <div class="scratch-reveal" id="scratch-reveal">
+            <strong>¡Uy! Vuelve a intentarlo.</strong>
+            <span>¡Suerte en la próxima! ♡</span>
+          </div>
+          <canvas class="scratch-canvas" id="scratch-canvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="scratch-actions">
+          <button class="button" id="reveal-surprise" type="button">Revelar rasca</button>
+          <button class="button" id="return-to-scratch-store" type="button" hidden>Volver a la tienda</button>
+        </div>
+      </div>
+      <div class="panel-navigation">
+        <button class="button" type="button" data-panel-step="-1"><span aria-hidden="true">←</span> Anterior</button>
+        <button class="button" type="button" data-panel-step="1">Siguiente: certificado <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="section section-panel" id="panel-certificado" role="tabpanel" aria-labelledby="tab-certificado" tabindex="0" hidden>
+      <p class="eyebrow" style="text-align:center">Reconocimiento oficial</p>
+      <h2 class="section-heading">Un certificado para ti</h2>
+      <p class="section-subtitle">Emitido con muchísimo cariño y cero posibilidad de apelación.</p>
+      <div class="certificate">
+        <div class="certificate-mark" aria-hidden="true">♡</div>
+        <p>Se otorga este reconocimiento a</p>
+        <p class="certificate-recipient">Valery</p>
+        <h3>La mejor compañera de aventuras</h3>
+        <p>Por llenar los días de alegría, convertir cualquier momento en un recuerdo y hacer que coincidir se sienta como suerte.</p>
+        <p class="certificate-signature">Con todo mi cariño,<br>tu persona favorita ♡</p>
+        <p id="certificate-date"></p>
+      </div>
+      <div class="scratch-actions certificate-actions">
+        <button class="button" id="download-certificate" type="button">Descargar certificado</button>
+      </div>
+      <div class="panel-navigation panel-navigation--end">
+        <button class="button" type="button" data-panel-step="-1"><span aria-hidden="true">←</span> Volver a la sorpresa</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con <span>♡</span>, especialmente para ti.</footer>
+
+  <script>
+    // Personaliza estos datos con su fecha real y el enlace de una canción de ustedes.
+    const FECHA_INICIO = "2025-02-17";
+    const ENLACE_CANCION = "https://open.spotify.com/track/724Txk8NEBXqNK7nIvY6MK?si=it4i9syeTHGp35e8P9yWHA&utm_source=copy-link";
+
+    const counterNote = document.getElementById("counter-note");
+    const counterValues = {
+      months: document.getElementById("counter-months"),
+      days: document.getElementById("counter-days"),
+      hours: document.getElementById("counter-hours"),
+      minutes: document.getElementById("counter-minutes"),
+      seconds: document.getElementById("counter-seconds")
+    };
+    const songLink = document.getElementById("song-link");
+    const letterButton = document.getElementById("letter-button");
+    const envelopeLabel = document.getElementById("envelope-label");
+    const letter = document.getElementById("love-letter");
+    const scratchCanvas = document.getElementById("scratch-canvas");
+    const revealSurpriseButton = document.getElementById("reveal-surprise");
+    const returnToScratchStoreButton = document.getElementById("return-to-scratch-store");
+    const scratchStore = document.getElementById("scratch-store");
+    const scratchGame = document.getElementById("scratch-game");
+    const buyScratchButton = document.getElementById("buy-scratch");
+    const scratchTitle = document.querySelector("#scratch-reveal strong");
+    const scratchMessage = document.querySelector("#scratch-reveal span");
+    const scratchPrizeTitle = "¡Te has ganado un millón de besitos y diez millones de abrazos!";
+    const scratchPrizeMessage = "Canjeables cuando quieras, sin fecha de caducidad. ♡";
+    const sebacoinBalance = document.getElementById("sebacoin-balance");
+    const sebacoinFeedback = document.getElementById("sebacoin-feedback");
+    const certificateDate = document.getElementById("certificate-date");
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+    const sectionProgress = document.getElementById("section-progress");
+    const sectionProgressCurrent = document.getElementById("section-progress-current");
+    const sectionProgressName = document.getElementById("section-progress-name");
+    const sectionProgressFill = document.getElementById("section-progress-fill");
+    const economyStorageKey = "valery-sebacoin-economy-v1";
+    const scratchCost = 1;
+    const rewardablePanels = {
+      0: "Nuestra historia",
+      1: "Recuerdos",
+      2: "Nuestra canción",
+      3: "Una carta",
+      5: "Certificado"
+    };
+    const defaultEconomy = { balance: 0, visitedPanels: [], scratchPurchased: false, scratchWinsOnThisCard: false };
+
+    function loadEconomy() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(economyStorageKey) || "null");
+        if (!saved || typeof saved !== "object") return { ...defaultEconomy };
+        return {
+          balance: Number.isSafeInteger(saved.balance) && saved.balance >= 0 ? saved.balance : 0,
+          visitedPanels: Array.isArray(saved.visitedPanels)
+            ? [...new Set(saved.visitedPanels.filter((index) => Number.isInteger(index) && Object.prototype.hasOwnProperty.call(rewardablePanels, index)))]
+            : [],
+          scratchPurchased: saved.scratchPurchased === true,
+          scratchWinsOnThisCard: saved.scratchWinsOnThisCard === true
+        };
+      } catch {
+        return { ...defaultEconomy };
+      }
+    }
+
+    let economy = loadEconomy();
+    let scratchInitialized = false;
+    let scratchViewReady = false;
+
+    function saveEconomy() {
+      try {
+        localStorage.setItem(economyStorageKey, JSON.stringify(economy));
+      } catch {
+        return;
+      }
+    }
+
+    function renderWallet(message = "") {
+      sebacoinBalance.textContent = String(economy.balance);
+      sebacoinFeedback.textContent = message;
+      buyScratchButton.disabled = economy.balance < scratchCost || economy.scratchPurchased;
+    }
+
+    function rewardPanelVisit(index) {
+      const sectionName = rewardablePanels[index];
+      if (!sectionName || economy.visitedPanels.includes(index)) return;
+      economy.visitedPanels.push(index);
+      economy.balance++;
+      saveEconomy();
+      renderWallet(`+1 Sebacoin por visitar ${sectionName}.`);
+    }
+
+    function resetScratchForPurchase() {
+      scratchTitle.textContent = economy.scratchWinsOnThisCard ? scratchPrizeTitle : "¡Uy! Vuelve a intentarlo.";
+      scratchMessage.textContent = economy.scratchWinsOnThisCard ? scratchPrizeMessage : "¡Suerte en la próxima! ♡";
+      scratchCanvas.hidden = false;
+      revealSurpriseButton.textContent = "Revelar rasca";
+      revealSurpriseButton.hidden = false;
+      returnToScratchStoreButton.hidden = true;
+      setupScratchCard();
+      coverScratchCard();
+      scratchViewReady = true;
+    }
+
+    function purchaseScratch() {
+      if (economy.balance < scratchCost || economy.scratchPurchased) return;
+      economy.balance -= scratchCost;
+      economy.scratchPurchased = true;
+      economy.scratchWinsOnThisCard = economy.balance === 0;
+      saveEconomy();
+      scratchStore.hidden = true;
+      scratchGame.hidden = false;
+      resetScratchForPurchase();
+      renderWallet(`Rasca comprado por ${scratchCost} Sebacoin.`);
+    }
+
+    function returnToScratchStore() {
+      scratchStore.hidden = false;
+      scratchGame.hidden = true;
+      returnToScratchStoreButton.hidden = true;
+      scratchViewReady = false;
+      renderWallet();
+    }
+
+    function completeScratchAttempt() {
+      if (!economy.scratchPurchased) return;
+      scratchCanvas.hidden = true;
+      revealSurpriseButton.hidden = true;
+      const wins = economy.scratchWinsOnThisCard;
+      economy.scratchPurchased = false;
+      economy.scratchWinsOnThisCard = false;
+      if (!wins) {
+        scratchTitle.textContent = "¡Uy! Vuelve a intentarlo.";
+        scratchMessage.textContent = "¡Suerte en la próxima! ♡";
+        returnToScratchStoreButton.hidden = false;
+        scratchViewReady = false;
+      } else {
+        scratchTitle.textContent = scratchPrizeTitle;
+        scratchMessage.textContent = scratchPrizeMessage;
+        returnToScratchStoreButton.hidden = false;
+      }
+      saveEconomy();
+    }
+
+    function coverScratchCard() {
+      const bounds = scratchCanvas.getBoundingClientRect();
+      const scale = window.devicePixelRatio || 1;
+      scratchCanvas.width = Math.round(bounds.width * scale);
+      scratchCanvas.height = Math.round(bounds.height * scale);
+      const context = scratchCanvas.getContext("2d", { willReadFrequently: true });
+      context.scale(scale, scale);
+
+      const foil = context.createLinearGradient(0, 0, bounds.width, bounds.height);
+      foil.addColorStop(0, "#e9c2c2");
+      foil.addColorStop(.5, "#fff0e7");
+      foil.addColorStop(1, "#dba3a5");
+      context.globalCompositeOperation = "source-over";
+      context.fillStyle = foil;
+      context.fillRect(0, 0, bounds.width, bounds.height);
+      context.fillStyle = "#8e5260";
+      context.font = "700 16px Arial, sans-serif";
+      context.textAlign = "center";
+      context.fillText("RASCA AQUÍ  ♡", bounds.width / 2, bounds.height / 2 + 6);
+    }
+
+    function setupScratchCard() {
+      if (scratchInitialized) return;
+      coverScratchCard();
+      const context = scratchCanvas.getContext("2d", { willReadFrequently: true });
+
+      let isScratching = false;
+      function scratch(event) {
+        const rect = scratchCanvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        context.globalCompositeOperation = "destination-out";
+        context.beginPath();
+        context.arc(x, y, 25, 0, Math.PI * 2);
+        context.fill();
+
+      }
+
+      function checkScratchProgress() {
+        const pixels = context.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height).data;
+        const step = 12;
+        let transparent = 0;
+        let sampled = 0;
+        for (let y = 0; y < scratchCanvas.height; y += step) {
+          for (let x = 0; x < scratchCanvas.width; x += step) {
+            sampled++;
+            if (pixels[(y * scratchCanvas.width + x) * 4 + 3] < 128) transparent++;
+          }
+        }
+        if (transparent / sampled > .95) completeScratchAttempt();
+      }
+
+      scratchCanvas.addEventListener("pointerdown", (event) => {
+        isScratching = true;
+        scratchCanvas.setPointerCapture(event.pointerId);
+        scratch(event);
+      });
+      scratchCanvas.addEventListener("pointermove", (event) => {
+        if (isScratching) scratch(event);
+      });
+      scratchCanvas.addEventListener("pointerup", () => {
+        isScratching = false;
+        checkScratchProgress();
+      });
+      scratchCanvas.addEventListener("pointercancel", () => { isScratching = false; });
+      scratchInitialized = true;
+    }
+
+    function showPanel(index, moveFocus) {
+      const previousIndex = tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true");
+      const selectedIndex = Math.max(0, Math.min(index, tabs.length - 1));
+      tabs.forEach((tab, tabIndex) => {
+        const isSelected = tabIndex === selectedIndex;
+        tab.setAttribute("aria-selected", String(isSelected));
+        tab.tabIndex = isSelected ? 0 : -1;
+        panels[tabIndex].hidden = !isSelected;
+      });
+      const currentSection = selectedIndex + 1;
+      sectionProgressCurrent.textContent = String(currentSection).padStart(2, "0");
+      sectionProgressName.textContent = tabs[selectedIndex].textContent.trim();
+      sectionProgressFill.style.width = `${currentSection / tabs.length * 100}%`;
+      sectionProgress.setAttribute("aria-valuenow", String(currentSection));
+      if (selectedIndex === 4) {
+        const hasPurchasedScratch = economy.scratchPurchased;
+        scratchStore.hidden = hasPurchasedScratch;
+        scratchGame.hidden = !hasPurchasedScratch;
+        if (hasPurchasedScratch && !scratchViewReady) resetScratchForPurchase();
+        if (!hasPurchasedScratch) scratchViewReady = false;
+      }
+      if (selectedIndex !== previousIndex) rewardPanelVisit(selectedIndex);
+      if (moveFocus) tabs[selectedIndex].focus();
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => showPanel(index, false));
+      tab.addEventListener("keydown", (event) => {
+        let nextIndex = index;
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === "Home") nextIndex = 0;
+        else if (event.key === "End") nextIndex = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        showPanel(nextIndex, true);
+      });
+    });
+
+    document.querySelectorAll("[data-panel-step]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const currentIndex = tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true");
+        showPanel(currentIndex + Number(button.dataset.panelStep), true);
+      });
+    });
+
+    document.querySelector('a[href="#panel-historia"]').addEventListener("click", () => showPanel(0, false));
+    songLink.addEventListener("click", () => {
+      if (!ENLACE_CANCION) showPanel(3, false);
+    });
+
+    function getAnniversaryDate(start, monthOffset) {
+      const anniversary = new Date(start);
+      const day = anniversary.getDate();
+      anniversary.setDate(1);
+      anniversary.setMonth(anniversary.getMonth() + monthOffset);
+      const lastDay = new Date(anniversary.getFullYear(), anniversary.getMonth() + 1, 0).getDate();
+      anniversary.setDate(Math.min(day, lastDay));
+      return anniversary;
+    }
+
+    function updateCounter(start) {
+      const now = new Date();
+      let months = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+      if (getAnniversaryDate(start, months) > now) months--;
+
+      const lastAnniversary = getAnniversaryDate(start, months);
+      let remainder = now.getTime() - lastAnniversary.getTime();
+      const days = Math.floor(remainder / 86400000);
+      remainder -= days * 86400000;
+      const hours = Math.floor(remainder / 3600000);
+      remainder -= hours * 3600000;
+      const minutes = Math.floor(remainder / 60000);
+      const seconds = Math.floor((remainder - minutes * 60000) / 1000);
+
+      counterValues.months.textContent = String(months);
+      counterValues.days.textContent = String(days);
+      counterValues.hours.textContent = String(hours).padStart(2, "0");
+      counterValues.minutes.textContent = String(minutes).padStart(2, "0");
+      counterValues.seconds.textContent = String(seconds).padStart(2, "0");
+    }
+
+    function escapeXml(value) {
+      return value.replace(/[<>&'"]/g, (character) => ({
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "'": "&apos;",
+        '"': "&quot;"
+      })[character]);
+    }
+
+    function downloadCertificate() {
+      const certificate = document.querySelector(".certificate");
+      const award = certificate.querySelectorAll("p");
+      const descriptionWords = award[2].textContent.trim().split(/\s+/);
+      const descriptionLines = [];
+      let line = "";
+      descriptionWords.forEach((word) => {
+        const nextLine = line ? `${line} ${word}` : word;
+        if (nextLine.length > 72 && line) {
+          descriptionLines.push(line);
+          line = word;
+        } else {
+          line = nextLine;
+        }
+      });
+      if (line) descriptionLines.push(line);
+
+      const signatureLines = certificate.querySelector(".certificate-signature").innerText.split("\n");
+      const descriptionSvg = descriptionLines.map((text, index) =>
+        `<text x="500" y="${438 + index * 31}" text-anchor="middle" font-size="19" fill="#876e77">${escapeXml(text)}</text>`
+      ).join("");
+      const signatureSvg = signatureLines.map((text, index) =>
+        `<text x="500" y="${540 + index * 30}" text-anchor="middle" font-size="19" fill="#452c35">${escapeXml(text)}</text>`
+      ).join("");
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1000 700">
+        <rect width="1000" height="700" fill="#fffaf7"/>
+        <rect x="28" y="28" width="944" height="644" fill="#fffdfb" stroke="#b94f68" stroke-width="3"/>
+        <rect x="43" y="43" width="914" height="614" fill="none" stroke="#efd6d5" stroke-width="2"/>
+        <text x="500" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#b94f68">♡</text>
+        <text x="500" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#b94f68">RECONOCIMIENTO OFICIAL</text>
+        <text x="500" y="253" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#876e77">${escapeXml(award[0].textContent.trim())}</text>
+        <text x="500" y="310" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-style="italic" fill="#452c35">${escapeXml(certificate.querySelector(".certificate-recipient").textContent.trim())}</text>
+        <text x="500" y="380" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#b94f68">${escapeXml(certificate.querySelector("h3").textContent.trim())}</text>
+        ${descriptionSvg}
+        ${signatureSvg}
+        <text x="500" y="625" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#876e77">${escapeXml(certificateDate.textContent.trim())}</text>
+      </svg>`;
+      const svgFile = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+      const svgUrl = URL.createObjectURL(svgFile);
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1200;
+        canvas.height = 840;
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#fffaf7";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(svgUrl);
+        canvas.toBlob((jpgFile) => {
+          if (!jpgFile) return;
+          const jpgUrl = URL.createObjectURL(jpgFile);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = jpgUrl;
+          downloadLink.download = "certificado-valery.jpg";
+          document.body.append(downloadLink);
+          downloadLink.click();
+          downloadLink.remove();
+          window.setTimeout(() => URL.revokeObjectURL(jpgUrl), 1000);
+        }, "image/jpeg", .95);
+      };
+      image.onerror = () => URL.revokeObjectURL(svgUrl);
+      image.src = svgUrl;
+    }
+
+    if (FECHA_INICIO) {
+      const start = new Date(`${FECHA_INICIO}T00:00:00`);
+      if (Number.isNaN(start.getTime())) {
+        counterNote.textContent = "Revisa la fecha de inicio para mostrar el contador.";
+      } else if (start > new Date()) {
+        counterNote.textContent = "La fecha de inicio aún no ha llegado.";
+      } else {
+        counterNote.textContent = "Y contando cada segundo con mucha ilusión. ♡";
+        updateCounter(start);
+        window.setInterval(() => updateCounter(start), 1000);
+      }
+    }
+
+    if (ENLACE_CANCION) {
+      songLink.href = ENLACE_CANCION;
+      songLink.target = "_blank";
+      songLink.rel = "noopener noreferrer";
+      songLink.textContent = "Escuchar nuestra canción";
+    }
+
+    letterButton.addEventListener("click", () => {
+      const isOpening = letter.hidden;
+      letter.hidden = !isOpening;
+      letterButton.setAttribute("aria-expanded", String(isOpening));
+      letterButton.classList.toggle("is-open", isOpening);
+      envelopeLabel.textContent = isOpening ? "Cerrar mi carta" : "Abrir mi carta";
+    });
+
+    revealSurpriseButton.addEventListener("click", completeScratchAttempt);
+    buyScratchButton.addEventListener("click", purchaseScratch);
+    returnToScratchStoreButton.addEventListener("click", returnToScratchStore);
+    document.getElementById("download-certificate").addEventListener("click", downloadCertificate);
+    certificateDate.textContent = new Intl.DateTimeFormat("es", { dateStyle: "long" }).format(new Date());
+    renderWallet();
+    rewardPanelVisit(0);
+    showPanel(0, false);
+  </script>
+</body>
+</html>
