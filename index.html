@@ -743,6 +743,8 @@
     }
 
     let economy = loadEconomy();
+    economy.visitedPanels = [];
+    saveEconomy();
     let scratchInitialized = false;
     let scratchViewReady = false;
 
